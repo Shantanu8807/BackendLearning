@@ -3,15 +3,21 @@ pipeline {
 
     tools {
         maven 'Maven3'
+        jdk 'JDK17'
     }
 
     stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Shantanu8807/BackendLearning.git'
+            }
+        }
 
         stage('Build Order Service') {
             steps {
                 dir('order-service') {
                     sh 'mvn clean package -DskipTests'
-                    sh 'docker build -t order-service .'
                 }
             }
         }
@@ -20,15 +26,13 @@ pipeline {
             steps {
                 dir('email-service') {
                     sh 'mvn clean package -DskipTests'
-                    sh 'docker build -t email-service .'
                 }
             }
         }
 
-        stage('Start All Containers') {
+        stage('Docker Compose Up') {
             steps {
-                sh 'docker compose down || true'
-                sh 'docker compose up -d'
+                sh 'docker compose up -d --build'
             }
         }
     }
