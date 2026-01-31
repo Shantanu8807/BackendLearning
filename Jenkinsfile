@@ -33,7 +33,7 @@ pipeline {
         stage('Docker Compose Up') {
             steps {
               sh '''
-              docker compose up -d --build
+              docker-compose up -d --build
                  '''
             }
         }
