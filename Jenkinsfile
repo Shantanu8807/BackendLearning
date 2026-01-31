@@ -32,6 +32,7 @@ pipeline {
 
         stage('Docker Compose Up') {
             steps {
+            export DOCKER_BUILDKIT=0
               sh '''
               docker-compose up -d --build
                  '''
