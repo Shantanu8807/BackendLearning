@@ -1,0 +1,15 @@
+package com.order_service.controller;
+
+@RestController
+@RequestMapping("/orders")
+public class OrderController {
+
+    @Autowired
+    private OrderProducer producer;
+
+    @PostMapping
+    public String placeOrder(@RequestBody String order) {
+        producer.sendOrder(order);
+        return "Order sent to Kafka: " + order;
+    }
+}

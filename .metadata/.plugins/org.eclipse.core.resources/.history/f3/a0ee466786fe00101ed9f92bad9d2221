@@ -1,0 +1,15 @@
+package com.order_service.producer;
+
+@Service
+public class OrderProducer {
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    private static final String TOPIC = "orders";
+
+    public void sendOrder(String order) {
+        kafkaTemplate.send(TOPIC, order);
+        System.out.println("📤 Order sent to Kafka: " + order);
+    }
+}

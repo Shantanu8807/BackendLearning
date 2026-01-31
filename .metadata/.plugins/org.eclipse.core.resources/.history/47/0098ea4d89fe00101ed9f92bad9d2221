@@ -1,0 +1,5 @@
+package com.email_service.consumer;
+
+public class OrderConsumer {
+
+}
