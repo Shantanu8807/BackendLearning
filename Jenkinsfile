@@ -5,6 +5,9 @@ pipeline {
         maven 'Maven3'
         jdk 'JDK17'
     }
+    environment {
+        DOCKER_BUILDKIT = '1'
+    }
 
     stages {
 
