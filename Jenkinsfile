@@ -43,8 +43,7 @@ pipeline {
 
         stage('Docker Compose Up') {
             steps {
-                // Use full Windows path to docker-compose.ymlC:\Users\user\Desktop\backend-learning
-                bat 'docker compose -f "C:\\Users\\user\\Desktop\\backend-learning\\docker-compose.yml" up --build -d'
+                bat 'docker compose -f "C:/Users/user/Desktop/backend-learning/docker-compose.yml" up --build -d'
             }
         }
     }
