@@ -43,7 +43,7 @@ pipeline {
         stage('Docker Compose Up') {
             steps {
               sh '''
-              docker compose up --build
+              docker compose -f docker-compose.yml up --build -d
                  '''
             }
         }
