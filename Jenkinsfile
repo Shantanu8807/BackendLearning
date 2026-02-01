@@ -41,11 +41,9 @@ pipeline {
         }
 
         stage('Docker Compose Up') {
-            steps {
-              sh '''
-              docker compose -f docker-compose.yml up --build -d
-                 '''
-            }
-        }
+    steps {
+        bat 'docker compose -f C:\\Users\\user\\BackendLearning\\docker-compose.yml up --build -d'
+    }
+}
     }
 }
