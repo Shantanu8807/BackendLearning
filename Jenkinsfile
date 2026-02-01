@@ -12,10 +12,17 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-            steps {
-                git branch: 'master', url: 'https://github.com/Shantanu8807/BackendLearning.git'
-            }
-        }
+    steps {
+        // Clean workspace first
+        deleteDir()
+        
+        // Checkout Git repo
+        checkout([$class: 'GitSCM',
+            branches: [[name: '*/master']],
+            userRemoteConfigs: [[url: 'https://github.com/Shantanu8807/BackendLearning.git']]
+        ])
+    }
+}
 
         stage('Build Order Service') {
             steps {
