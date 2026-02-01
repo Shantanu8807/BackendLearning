@@ -5,6 +5,7 @@ pipeline {
         maven 'Maven3'
         jdk 'JDK17'
     }
+
     environment {
         DOCKER_BUILDKIT = '0'
     }
@@ -12,22 +13,22 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-    steps {
-        // Clean workspace first
-        deleteDir()
-        
-        // Checkout Git repo
-        checkout([$class: 'GitSCM',
-            branches: [[name: '*/master']],
-            userRemoteConfigs: [[url: 'https://github.com/Shantanu8807/BackendLearning.git']]
-        ])
-    }
-}
+            steps {
+                // Clean workspace first
+                deleteDir()
+                
+                // Checkout Git repo
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[url: 'https://github.com/Shantanu8807/BackendLearning.git']]
+                ])
+            }
+        }
 
         stage('Build Order Service') {
             steps {
                 dir('order-service') {
-                    sh 'mvn clean package -DskipTests'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
         }
@@ -35,15 +36,16 @@ pipeline {
         stage('Build Email Service') {
             steps {
                 dir('email-service') {
-                    sh 'mvn clean package -DskipTests'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
         }
 
-stage('Docker Compose Up') {
-    steps {
-        bat 'docker compose -f "C:\\Users\\user\\BackendLearning\\docker-compose.yml" up --build -d'
-    }
-}
+        stage('Docker Compose Up') {
+            steps {
+                // Use full Windows path to docker-compose.yml
+                bat 'docker compose -f "C:\\Users\\user\\BackendLearning\\docker-compose.yml" up --build -d'
+            }
+        }
     }
 }
