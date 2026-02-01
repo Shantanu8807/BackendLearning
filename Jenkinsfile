@@ -42,7 +42,7 @@ pipeline {
 
 stage('Docker Compose Up') {
     steps {
-        sh 'docker compose -f /var/jenkins_home/workspace/backend-pipeline/docker-compose.yml up --build -d'
+        bat 'docker compose -f "C:\\Users\\user\\BackendLearning\\docker-compose.yml" up --build -d'
     }
 }
     }
